@@ -8,13 +8,16 @@ export async function AuthHandling(data, type) {
 	console.log('user data : ', data)
 
 	try {
-		const response = await fetch(`http://localhost:8081/${type}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
+		const response = await fetch(
+			import.meta.env.VITE_API_ENDPOINT + `/${type}`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(json),
 			},
-			body: JSON.stringify(json),
-		})
+		)
 
 		if (!response.ok) {
 			console.log('Error : ', response)

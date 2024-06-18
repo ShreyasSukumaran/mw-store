@@ -1,8 +1,8 @@
 import { Input } from '..'
 import { FormProvider, useForm } from 'react-hook-form'
 import {
-	first_name_validation,
-	last_name_validation,
+	firstName_validation,
+	lastName_validation,
 	email_validation,
 	password_validation,
 } from '../../utils/inputValidations'
@@ -24,8 +24,8 @@ export const RegisterForm = ({ formState }) => {
 		<FormProvider {...methods}>
 			<form onSubmit={e => e.preventDefault()} noValidate className="container">
 				<div>
-					<Input {...first_name_validation} />
-					<Input {...last_name_validation} />
+					<Input {...firstName_validation} />
+					<Input {...lastName_validation} />
 					<Input {...email_validation} />
 					<Input {...password_validation} />
 				</div>

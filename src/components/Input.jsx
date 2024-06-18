@@ -39,6 +39,7 @@ export const Input = ({ name, label, type, id, placeholder, validation }) => {
 }
 
 const InputError = ({ message }) => {
+	console.log('Input error : ', message)
 	return (
 		<motion.p
 			className="flex items-center gap-1 px-2 font-semibold text-red-500 bg-red-100 rounded-md"

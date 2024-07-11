@@ -1,34 +1,16 @@
-//import { BsGithub, BsTwitter } from 'react-icons/bs'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-export const Navigation = ({ formState }) => {
+export const Navigation = () => {
 	return (
-		<div className="container">
-			<div className="container-fluid">
-				<ul>
-					<li>
-						<a onClick={() => formState(false)} href="#">
-							Login
-						</a>
-					</li>
-					<li>
-						<a onClick={() => formState(true)} href="#">
-							Register
-						</a>
-					</li>
-					<li>
-						<Link to="/logout">Logout</Link>
-					</li>
-					<li>
-						<Link to="/dashboard">Dashboard</Link>
-					</li>
-				</ul>
-			</div>
+		<div className="absolute top-0 left-0 w-100 content-center bg-white p-2">
+			<ul className="flex gap-3">
+				<li>
+					<Link to="/logout">Logout</Link>
+				</li>
+				<li>
+					<Link to="/dashboard">Dashboard</Link>
+				</li>
+			</ul>
 		</div>
 	)
-}
-
-Navigation.propTypes = {
-	formState: PropTypes.func.isRequired,
 }

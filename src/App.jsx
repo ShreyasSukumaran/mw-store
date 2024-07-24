@@ -24,16 +24,22 @@ function App() {
 					<Route
 						path="/auth"
 						element={
-							register ? (
+							register && !token ? (
 								<RegisterForm formState={setRegister} />
 							) : (
 								<LoginForm formState={setRegister} />
 							)
 						}
 					/>
-					<Route path="/home" element={<HomeComponent />} />
+					<Route
+						path="/home"
+						element={token ? <HomeComponent /> : <Navigate to="/auth" />}
+					/>
 					<Route path="/logout" element={<Logout />} />
-					<Route path="/dashboard" element={<DashboardComponent />} />
+					<Route
+						path="/dashboard"
+						element={token ? <DashboardComponent /> : <Navigate to="/auth" />}
+					/>
 				</Routes>
 			</div>
 		</>

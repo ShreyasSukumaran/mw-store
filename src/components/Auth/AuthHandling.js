@@ -28,7 +28,15 @@ export async function AuthHandling(data, type) {
 		console.log(result.accessToken)
 
 		if (type == 'login') {
-			cookies.set('TOKEN', result.accessToken)
+			const setCookieWithTimeout = (name, value, timeoutInSeconds) => {
+				const expires = new Date()
+				expires.setSeconds(expires.getSeconds() + timeoutInSeconds)
+
+				cookies.set(name, value, { path: '/', expires })
+			}
+
+			// Example usage
+			setCookieWithTimeout('TOKEN', result.accessToken, 10000) 
 			window.location.href = '/dashboard'
 		} else window.location.href = '/auth'
 	} catch (error) {

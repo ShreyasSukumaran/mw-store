@@ -17,7 +17,7 @@ const framer_error = {
 
 export const InputError = ({ message }) => {
 	let input_tailwind = ''
-	if (['User Not found.', "Invalid Password!"].includes(message)) {
+	if (['User Not found', "Invalid Password!"].includes(message)) {
 		input_tailwind = 'flex bg-red-100 text-red-500 font-semibold items-center gap-1 mb-2 px-2 rounded-md absolute top-[-2.5rem] translate-x-2/4 translate-y-0 w-max';
 	} else {
 		input_tailwind = "flex bg-red-100 text-red-500 font-semibold items-center gap-1 mb-2 px-2 rounded-md";
@@ -27,7 +27,7 @@ export const InputError = ({ message }) => {
 			className={cn(input_tailwind)}
 			{...framer_error}
 		>
-			{!['User Not found.', "Invalid Password!"].includes(message) && <MdError /> }
+			{!['User Not found', "Invalid Password!"].includes(message) && <MdError /> }
 			{message}
 		</motion.p>
 	);

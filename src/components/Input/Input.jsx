@@ -1,8 +1,8 @@
 import cn from "classnames";
-import { findInputError, isFormInvalid } from "../utils";
+import { findInputError, isFormInvalid } from "../../utils";
 import { useFormContext } from "react-hook-form";
-import { AnimatePresence, motion } from "framer-motion";
-import { MdError } from "react-icons/md";
+import { AnimatePresence} from "framer-motion";
+import {InputError} from "./InputError";
 import PropTypes from "prop-types";
 
 export const Input = ({ name, label, type, id, placeholder, validation }) => {
@@ -13,6 +13,10 @@ export const Input = ({ name, label, type, id, placeholder, validation }) => {
 
 	const inputError = findInputError(errors, id);
 	const isInvalid = isFormInvalid(inputError);
+
+	//document.getElementById(`${id}`).onblur(e => {
+		
+	//})
 
 	const input_tailwind =
 		"p-3 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 bg-white";
@@ -42,29 +46,6 @@ export const Input = ({ name, label, type, id, placeholder, validation }) => {
 			/>
 		</div>
 	);
-};
-
-const InputError = ({ message }) => {
-	return (
-		<motion.p
-			className="flex items-center gap-1 px-2 font-semibold text-red-500 bg-red-100 rounded-md mb-2"
-			{...framer_error}
-		>
-			<MdError />
-			{message}
-		</motion.p>
-	);
-};
-
-const framer_error = {
-	initial: { opacity: 0, y: 10 },
-	animate: { opacity: 1, y: 0 },
-	exit: { opacity: 0, y: 10 },
-	transition: { duration: 0.2 },
-};
-
-InputError.propTypes = {
-	message: PropTypes.string,
 };
 
 Input.propTypes = {

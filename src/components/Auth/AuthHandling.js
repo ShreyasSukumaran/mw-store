@@ -5,8 +5,6 @@ export async function AuthHandling(data, type) {
 	const json = { ...data }
 	const cookies = new Cookies()
 
-	console.log('user data : ', data)
-
 	try {
 		const response = await fetch(
 			import.meta.env.VITE_API_ENDPOINT + `/${type}`,
@@ -20,25 +18,27 @@ export async function AuthHandling(data, type) {
 		)
 
 		if (!response.ok) {
-			console.log('Error : ', response)
-			throw new Error('Network response was not ok')
+			console.log('Error : ', response);
+			throw new Error('Network Error, Please try again later');
 		}
 
 		const result = await response.json()
 		console.log(result.accessToken)
+		if (response.ok && result.accessToken) {
+			if (type == 'login') {
+				const setCookieWithTimeout = (name, value, timeoutInSeconds) => {
+					const expires = new Date()
+					expires.setSeconds(expires.getSeconds() + timeoutInSeconds)
 
-		if (type == 'login') {
-			const setCookieWithTimeout = (name, value, timeoutInSeconds) => {
-				const expires = new Date()
-				expires.setSeconds(expires.getSeconds() + timeoutInSeconds)
+					cookies.set(name, value, { path: '/', expires })
+				}
 
-				cookies.set(name, value, { path: '/', expires })
-			}
-
-			// Example usage
-			setCookieWithTimeout('TOKEN', result.accessToken, 10000) 
-			window.location.href = '/dashboard'
-		} else window.location.href = '/auth'
+				setCookieWithTimeout('TOKEN', result.accessToken, 86400) 
+				window.location.href = '/dashboard'
+			} else window.location.href = '/auth'
+		} else {
+			return result;
+		}
 	} catch (error) {
 		console.log(error)
 	}

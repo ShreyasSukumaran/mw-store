@@ -25,7 +25,7 @@ export const RegisterForm = ({ formState }) => {
 			<form
 				onSubmit={(e) => e.preventDefault()}
 				noValidate
-				className="absolute-center"
+				//className="absolute-center"
 			>
 				<div className="grid gap-5 md:grid-cols-2">
 					<Input {...firstName_validation} />

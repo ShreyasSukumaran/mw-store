@@ -10,16 +10,25 @@ import {
 import { AuthHandling } from "./AuthHandling";
 import PropTypes from "prop-types";
 //import http2 from 'http2'
-//import { useState } from 'react'
+import { useState } from 'react'
+import {InputError} from "../Input/InputError";
+import { AnimatePresence} from "framer-motion";
 // import { BsFillCheckSquareFill } from 'react-icons/bs'
 
 export const RegisterForm = ({ formState }) => {
 	const methods = useForm();
+	const [isInvalid, setIsInvalid] = useState(false);
+	const [inputError, setInputError] = useState('');
 
 	const onSubmit = methods.handleSubmit(async (data) =>
-		AuthHandling(data, "register")
+		AuthHandling(data, "register").then((error) => {
+			setIsInvalid(true);
+			setInputError(error.message);
+		})
 	);
 
+	const setInvalidFalse = () => setIsInvalid(false);
+	
 	return (
 		<FormProvider {...methods}>
 			<form
@@ -27,12 +36,20 @@ export const RegisterForm = ({ formState }) => {
 				noValidate
 				//className="absolute-center"
 			>
-				<div className="grid gap-5 md:grid-cols-2">
-					<Input {...firstName_validation} />
-					<Input {...lastName_validation} />
-					<Input {...email_validation} />
-					<Input {...password_validation} />
+				<div className="form-grid">
+					<Input {...firstName_validation} setIsInvalid={setInvalidFalse}  />
+					<Input {...lastName_validation} setIsInvalid={setInvalidFalse}  />
+					<Input {...email_validation} setIsInvalid={setInvalidFalse}  />
+					<Input {...password_validation} setIsInvalid={setInvalidFalse}  />
 				</div>
+				<AnimatePresence mode="wait" initial={false}>
+					{isInvalid && (
+						<InputError
+							message={inputError}
+							key={inputError}
+						/>
+					)}
+				</AnimatePresence>
 				<div className="text-center">
 					<div className="mt-5">
 						<button onClick={onSubmit} className="btn btn-primary">

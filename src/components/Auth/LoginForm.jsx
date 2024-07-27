@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import {InputError} from "../Input/InputError";
 import { AnimatePresence} from "framer-motion";
 import { useState } from "react";
+import "./Auth.css";
 
 export const LoginForm = ({ formState }) => {
 	const methods = useForm();
@@ -22,6 +23,8 @@ export const LoginForm = ({ formState }) => {
 		})
 	);
 
+	const setInvalidFalse = () => setIsInvalid(false);
+
 	return (
 		<FormProvider {...methods}>
 			<form
@@ -29,9 +32,9 @@ export const LoginForm = ({ formState }) => {
 				noValidate
 				//className="absolute-center"
 			>
-				<div className="grid gap-5 md:grid-cols-2">
-					<Input {...email_validation} />
-					<Input {...password_validation} />
+				<div className="form-grid">
+					<Input {...email_validation} setIsInvalid={setInvalidFalse} />
+					<Input {...password_validation} setIsInvalid={setInvalidFalse} />
 				</div>
 				<AnimatePresence mode="wait" initial={false}>
 					{isInvalid && (

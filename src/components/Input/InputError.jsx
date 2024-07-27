@@ -2,7 +2,6 @@
 import { motion } from "framer-motion";
 import { MdError } from "react-icons/md";
 import PropTypes from "prop-types";
-import cn from "classnames";
 
 
 const framer_error = {
@@ -18,13 +17,13 @@ const framer_error = {
 export const InputError = ({ message }) => {
 	let input_tailwind = ''
 	if (['User Not found', "Invalid Password!"].includes(message)) {
-		input_tailwind = 'flex bg-red-100 text-red-500 font-semibold items-center gap-1 mb-2 px-2 rounded-md absolute top-[-2.5rem] translate-x-2/4 translate-y-0 w-max';
+		input_tailwind = 'inputError formError';
 	} else {
-		input_tailwind = "flex bg-red-100 text-red-500 font-semibold items-center gap-1 mb-2 px-2 rounded-md";
+		input_tailwind = "inputError";
 	}
 	return (
 		<motion.p
-			className={cn(input_tailwind)}
+			className={input_tailwind}
 			{...framer_error}
 		>
 			{!['User Not found', "Invalid Password!"].includes(message) && <MdError /> }

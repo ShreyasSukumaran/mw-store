@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
+import "./Navigation.css";
 
 export const Navigation = ({token}) => {
 	return (
-		<div className="absolute top-0 left-0 w-100 content-center bg-white p-2">
-			<ul className="flex gap-3">
+		<div className="navigation-container">
+			<ul className="flex-gap">
 				<li>
 					{token !== "false" && <Link to="/logout">Logout</Link>}
 				</li>

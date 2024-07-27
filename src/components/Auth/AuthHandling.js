@@ -18,12 +18,10 @@ export async function AuthHandling(data, type) {
 		)
 
 		if (!response.ok) {
-			console.log('Error : ', response);
 			throw new Error('Network Error, Please try again later');
 		}
 
 		const result = await response.json()
-		console.log(result.accessToken)
 		if (response.ok && result.accessToken) {
 			if (type == 'login') {
 				const setCookieWithTimeout = (name, value, timeoutInSeconds) => {

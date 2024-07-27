@@ -1,0 +1,8 @@
+.form-grid {
+	display: grid;
+	gap: 20px;
+
+	@media (min-width: 768px) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}

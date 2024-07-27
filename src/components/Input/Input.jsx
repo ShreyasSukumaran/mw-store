@@ -1,14 +1,15 @@
-import cn from "classnames";
 import { findInputError, isFormInvalid } from "../../utils";
 import { useFormContext } from "react-hook-form";
 import { AnimatePresence} from "framer-motion";
 import {InputError} from "./InputError";
 import PropTypes from "prop-types";
+import "./Input.css"
 
-export const Input = ({ name, label, type, id, placeholder, validation }) => {
+export const Input = ({ name, label, type, id, placeholder, validation, setIsInvalid }) => {
 	const {
 		register,
 		formState: { errors },
+		trigger
 	} = useFormContext();
 
 	const inputError = findInputError(errors, id);
@@ -17,14 +18,17 @@ export const Input = ({ name, label, type, id, placeholder, validation }) => {
 	//document.getElementById(`${id}`).onblur(e => {
 		
 	//})
-
-	const input_tailwind =
-		"p-3 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 bg-white";
+	
+	const handleChange = async () => {
+		setIsInvalid();
+		const result = await trigger(id);
+		if (result) setIsInvalid();
+	};
 
 	return (
-		<div className="flex flex-col w-full gap-2">
-			<div className="flex justify-between">
-				<label htmlFor={id} className="font-semibold capitalize">
+		<div className="flex-grid">
+			<div className="flex-space-btw">
+				<label htmlFor={id} className="font-capital">
 					{label}
 				</label>
 				<AnimatePresence mode="wait" initial={false}>
@@ -40,9 +44,9 @@ export const Input = ({ name, label, type, id, placeholder, validation }) => {
 				id={id}
 				type={type}
 				name={name}
-				className={cn(input_tailwind)}
+				className="input"
 				placeholder={placeholder}
-				{...register(id, validation)}
+				{...register(id, {validation, onChange:handleChange})}
 			/>
 		</div>
 	);
@@ -54,6 +58,7 @@ Input.propTypes = {
 	type: PropTypes.string.isRequired,
 	id: PropTypes.string.isRequired,
 	placeholder: PropTypes.string,
+	setIsInvalid: PropTypes.func.isRequired,
 	validation: PropTypes.shape({
 		required: PropTypes.shape({
 			value: PropTypes.any,

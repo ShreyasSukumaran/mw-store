@@ -1,52 +1,83 @@
-import { Navigation, HomeComponent, DashboardComponent } from './components'
+import {
+	Navigation,
+	HomeComponent,
+	DashboardComponent,
+	ErrorComponent,
+	MobileNavigation,
+} from './components'
 import { RegisterForm } from './components/Auth/RegisterForm'
 import { LoginForm } from './components/Auth/LoginForm'
 import { Logout } from './components/Auth/Logout'
-import { useState } from 'react'
+import { ProfileComponent, ProfileComponentGateway } from './components/Profile'
 import { Route, Navigate, Routes } from 'react-router-dom'
-import { ErrorComponent } from './components'
+import { isMobile } from 'react-device-detect'
+import { DialogProvider } from './context/DialogContext'
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
 function App() {
-	const [register, setRegister] = useState(true);
-	const token = cookies.get('TOKEN') ? cookies.get('TOKEN') : 'false';
+	const token = cookies.get('TOKEN') ? cookies.get('TOKEN') : 'false'
 
 	return (
 		<>
-			<Navigation token={token}/>
-			<div className="body">
+			<DialogProvider>
+				{isMobile ? <MobileNavigation /> : <Navigation token={token} />}
 				<Routes>
 					<Route
 						path="/"
-						element={token !== 'false' ? <Navigate to="/home" /> : <Navigate to="/auth" />}
-					/>
-					<Route
-						path="/auth"
-						element={token == 'false' ? 
-							(register ? (
-								<RegisterForm formState={setRegister} />
+						element={
+							token == 'false' ? (
+								<Navigate to="/login" />
 							) : (
-								<LoginForm formState={setRegister} />
-							)) : <Navigate to="/auth" />
+								<Navigate to="/home" />
+							)
 						}
 					/>
 					<Route
+						path="/register"
+						element={
+							token == 'false' ? <RegisterForm /> : <Navigate to="/home" />
+						}
+					/>
+					<Route
+						path="/login"
+						element={token == 'false' ? <LoginForm /> : <Navigate to="/home" />}
+					/>
+					<Route
 						path="/home"
-						element={token !== "false" ? <HomeComponent /> : <Navigate to="/auth" />}
+						element={
+							token !== 'false' ? <HomeComponent /> : <Navigate to="/login" />
+						}
 					/>
 					<Route path="/logout" element={<Logout />} />
 					<Route
 						path="/dashboard"
-						element={token !== "false" ? <DashboardComponent /> : <Navigate to="/auth" />}
+						element={
+							token !== 'false' ? (
+								<DashboardComponent />
+							) : (
+								<Navigate to="/login" />
+							)
+						}
 					/>
 					<Route
-						path="/*"
-						element={<ErrorComponent />}
+						path="/password-change"
+						element={<ProfileComponentGateway />}
 					/>
+					<Route
+						path="/password-update"
+						element={
+							token !== 'false' ? (
+								<ProfileComponent />
+							) : (
+								<Navigate to="/login" />
+							)
+						}
+					/>
+					<Route path="/*" element={<ErrorComponent />} />
 				</Routes>
-			</div>
+			</DialogProvider>
 		</>
 	)
 }

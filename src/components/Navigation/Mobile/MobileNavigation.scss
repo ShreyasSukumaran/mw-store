@@ -1,0 +1,41 @@
+.nav-right {
+	@media screen and (max-width: 500px) {
+		position: absolute;
+		right: 20px;
+	}
+}
+
+.search-button {
+	color: var(--white);
+	background-color: var(--brown);
+	border: none;
+	border-radius: 50%;
+	position: fixed;
+	width: 45px;
+	height: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 25px;
+	bottom: 3%;
+	right: 5%;
+}
+
+.search-input {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	border: 0.5px solid var(--brown);
+}
+
+#bottom-search {
+	width: 100%;
+	padding: 15px;
+	color: var(--brown);
+	border: none;
+	outline: none;
+
+	&::placeholder {
+		color: var(--brown);
+	}
+}

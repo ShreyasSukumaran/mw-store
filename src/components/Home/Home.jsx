@@ -1,3 +1,7 @@
 export const HomeComponent = () => {
-	return <p>Home Component</p>
+	return (
+		<div className="body">
+			<p>Home Component</p>
+		</div>
+	)
 }

@@ -1,0 +1,161 @@
+.form-inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 70%;
+	@media (max-width: 1400px) {
+		gap: 10px;
+	}
+	@media (max-width: 500px) {
+		width: 80%;
+	}
+}
+
+.user-check {
+	font-size: 'umpush-regular';
+	color: var(--brown);
+	font-size: 16px;
+}
+
+.user-check-link {
+	font-size: 'umpush-regular';
+	color: var(--brown);
+	transition: all 0.3s ease;
+	font-size: 16px;
+}
+
+.user-check-link:hover {
+	color: var(--dark-brown);
+	transition: all 0.3s ease;
+	text-decoration: none;
+}
+
+.auth-container {
+	background-color: var(--lite-brown);
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.form-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	/* height: 100%; */
+	width: 35%;
+	justify-content: center;
+	position: relative;
+	bottom: 5%;
+	gap: 30px;
+	@media (max-width: 1400px) {
+		gap: 10px;
+		bottom: 0%;
+	}
+	@media (max-width: 1200px) {
+		width: 40%;
+	}
+	@media (max-width: 900px) {
+		width: 45%;
+	}
+	@media (max-width: 600px) {
+		width: 100%;
+	}
+}
+
+.form-container.register-form {
+	bottom: 0%;
+	@media (max-width: 1400px) {
+		gap: 0;
+	}
+	.form-inputs {
+		gap: 15px;
+		@media (max-width: 1400px) {
+			gap: 10px;
+		}
+	}
+
+	.logo-image {
+		@media (max-width: 1400px) {
+			margin-bottom: 10px;
+			margin-top: 10px;
+		}
+		@media (max-width: 500px) {
+			margin-bottom: 30px;
+		}
+	}
+
+	.logo-image.error {
+		@media (max-width: 500px) {
+			margin-bottom: 30px;
+		}
+	}
+}
+
+.logo-image {
+	margin-bottom: 40px;
+	@media (max-width: 1400px) {
+		margin-bottom: 30px;
+	}
+}
+
+.logo-img {
+	width: 200px;
+	height: 175px;
+	@media (max-width: 1400px) {
+		width: 150px;
+		height: 130px;
+	}
+}
+
+.showcase-img {
+	width: 700px;
+	height: 990px;
+	@media (max-width: 1400px) {
+		width: 500px;
+		height: 390px;
+	}
+	@media (max-width: 900px) {
+		width: 400px;
+		height: 310px;
+	}
+}
+
+.form-submit {
+	justify-content: center;
+	width: 100%;
+	display: flex;
+	gap: 15px;
+	flex-direction: column;
+	text-align: center;
+	@media (max-width: 1400px) {
+		gap: 0px;
+	}
+}
+
+.image-container {
+	background-color: #f6eadcff;
+	width: 65%;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+	@media (max-width: 1200px) {
+		width: 60%;
+	}
+	@media (max-width: 900px) {
+		width: 55%;
+	}
+	@media (max-width: 600px) {
+		display: none;
+	}
+}
+
+//.form-error-container {
+//	margin-bottom: 20px;
+//}
+
+.forgot-password {
+	font-size: 14px;
+	text-align: center;
+	padding: 10px;
+}

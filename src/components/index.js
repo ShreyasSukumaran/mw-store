@@ -1,5 +1,6 @@
+export { ErrorComponent } from './Error/Error'
 export { Input } from './Input/Input'
-export { Navigation } from './Navigation/Navigation'
+export { Navigation } from './Navigation/Desktop/Navigation'
+export { MobileNavigation } from './Navigation/Mobile/MobileNavigation'
 export { HomeComponent } from './Home/Home'
 export { DashboardComponent } from './Dashboard/Dashboard'
-export { ErrorComponent } from './Error/Error'

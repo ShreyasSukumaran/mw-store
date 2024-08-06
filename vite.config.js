@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import eslintPlugin from 'vite-plugin-eslint'
+import sass from 'sass'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,6 +11,13 @@ export default defineConfig({
 			include: ['src/**/*.js', 'src/**/*.jsx', 'src/**/*.ts', 'src/**/*.tsx'],
 		}),
 	],
+	css: {
+		preprocessorOptions: {
+			scss: {
+				implementation: sass,
+			},
+		},
+	},
 	server: {
 		hmr: {
 			protocol: 'ws',

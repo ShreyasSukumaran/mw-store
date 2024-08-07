@@ -33,7 +33,7 @@ export const Navigation = ({ token }) => {
 			<div className="nav-left flex-gap">
 				<Link className="nav-logo" to="/home">
 					<img
-						src="./src/assets/images/haute-couture-nav-logo-text.svg"
+						src={import.meta.env.CDN_ENDPOINT ? import.meta.env.CDN_ENDPOINT+"/haute-couture-nav-logo-text.svg" : "./src/assets/images/haute-couture-nav-logo-text.svg"}
 						alt="Haute Couture Logo"
 						className="logo-img"
 						onContextMenu={handleContextMenu}

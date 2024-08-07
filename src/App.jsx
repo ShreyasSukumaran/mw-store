@@ -14,10 +14,13 @@ import { isMobile } from 'react-device-detect'
 import { DialogProvider } from './context/DialogContext'
 
 import Cookies from 'universal-cookie'
+import { object } from 'prop-types'
 const cookies = new Cookies()
 
 function App() {
-	const token = cookies.get('TOKEN') ? cookies.get('TOKEN') : 'false'
+	const token = (cookies.get('TOKEN') && typeof(cookies.get('TOKEN')) !== object) ? cookies.get('TOKEN') : 'false'
+
+	console.log(token)
 
 	return (
 		<>
@@ -66,7 +69,7 @@ function App() {
 						element={<ProfileComponentGateway />}
 					/>
 					<Route
-						path="/password-update"
+						path="/profile/*"
 						element={
 							token !== 'false' ? (
 								<ProfileComponent />

@@ -25,7 +25,7 @@ const useAuthRedirect = () => {
 
                     setCookieWithTimeout('TOKEN', token, 3600);
                     setCookieWithTimeout('EMAIL', email, 3600);
-                    navigate('/password-update');
+                    navigate('/profile/password-update');
                 } else {
                     navigate('/');
                 }

@@ -63,7 +63,7 @@ export const RegisterForm = () => {
 				<div className="image-container">
 					<div className="absolute-center">
 						<img
-							src="./src/assets/images/showcase.svg"
+							src={import.meta.env.CDN_ENDPOINT ? import.meta.env.CDN_ENDPOINT+"/showcase.svg" : "./src/assets/images/showcase.svg"}
 							alt="Showcase of clothes - illustration"
 							className="showcase-img"
 							onContextMenu={handleContextMenu}
@@ -79,7 +79,7 @@ export const RegisterForm = () => {
 					>
 						<div className={logoImageClass.current}>
 							<img
-								src="./src/assets/images/haute-couture-logo.svg"
+								src={import.meta.env.CDN_ENDPOINT ? import.meta.env.CDN_ENDPOINT+"/haute-couture-logo.svg" : "./src/assets/images/haute-couture-logo.svg"}
 								alt="Haute Couture Logo"
 								className="logo-img"
 								onContextMenu={handleContextMenu}

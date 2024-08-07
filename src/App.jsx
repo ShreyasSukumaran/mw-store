@@ -11,7 +11,7 @@ import { Logout } from './components/Auth/Logout'
 import { ProfileComponent, ProfileComponentGateway } from './components/Profile'
 import { Route, Navigate, Routes } from 'react-router-dom'
 import { isMobile } from 'react-device-detect'
-import { DialogProvider } from './context/DialogContext'
+import { DialogProvider } from './hooks/DialogContext'
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()

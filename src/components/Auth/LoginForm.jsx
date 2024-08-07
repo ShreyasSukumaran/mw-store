@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import './Auth.scss'
 import { useEffect } from 'react'
 import { useDialogTrigger } from '../Dialog/useDialog'
+import ImageComponent from '../ImageComponent'
 
 export const LoginForm = () => {
 	const methods = useForm()
@@ -20,6 +21,7 @@ export const LoginForm = () => {
 	const [passForgot, setPassForgot] = useState(false)
 	const triggerDialog = useDialogTrigger()
 
+	console.log("VITE : ",import.meta.env.VITE_API_ENDPOINT);
 	const onSubmit = methods.handleSubmit(async data => {
 		const method = !passForgot ? 'login' : 'password-reset'
 		AuthHandling(data, method).then(response => {
@@ -65,8 +67,8 @@ export const LoginForm = () => {
 				<div className="auth-container">
 					<div className="image-container">
 						<div className="absolute-center">
-							<img
-								src={import.meta.env.CDN_ENDPOINT ? import.meta.env.CDN_ENDPOINT+"/showcase.svg" : "./src/assets/images/showcase.svg"}
+							<ImageComponent
+								src={import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_CDN_ENDPOINT+"/showcase.svg" : "./src/assets/images/showcase.svg"}
 								alt="Showcase of clothes - illustration"
 								className="showcase-img"
 								onContextMenu={handleContextMenu}
@@ -82,7 +84,7 @@ export const LoginForm = () => {
 						>
 							<div className="logo-image">
 								<img
-									src={import.meta.env.CDN_ENDPOINT ? import.meta.env.CDN_ENDPOINT+"/haute-couture-logo.svg" : "./src/assets/images/haute-couture-logo.svg"}
+									src={import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_CDN_ENDPOINT+"/haute-couture-logo.svg" : "./src/assets/images/haute-couture-logo.svg"}
 									alt="Haute Couture Logo"
 									className="logo-img"
 									onContextMenu={handleContextMenu}

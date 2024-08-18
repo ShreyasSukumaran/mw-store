@@ -4,15 +4,15 @@ import {
 	email_validation,
 	password_validation,
 } from '../../utils/inputValidations'
-import { AuthHandling } from './AuthHandling'
+import { AuthHandling } from '../ApiRequests/Auth/AuthHandling'
 import { InputError } from '../Input/InputError'
 import { AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Auth.scss'
 import { useEffect } from 'react'
-import { useDialogTrigger } from '../Dialog/useDialog'
-import ImageComponent from '../ImageComponent'
+import { useDialogTrigger } from '../../hooks/Dialog/useDialog'
+import { ImageComponent } from '../ImageComponent'
 
 export const LoginForm = () => {
 	const methods = useForm()
@@ -21,18 +21,37 @@ export const LoginForm = () => {
 	const [passForgot, setPassForgot] = useState(false)
 	const triggerDialog = useDialogTrigger()
 
-	console.log("VITE : ",import.meta.env.VITE_API_ENDPOINT);
 	const onSubmit = methods.handleSubmit(async data => {
-		const method = !passForgot ? 'login' : 'password-reset'
-		AuthHandling(data, method).then(response => {
-			console.log(response);
-			if (method == 'password-reset' && response.isEmailSent) {
-				triggerDialog('A link has been to your Email')
-			} else {
-				setIsInvalid(true)
-				setInputError(response.message)
+		let methodName = !passForgot ? 'login' : 'password-reset'
+		try {
+			const response = await AuthHandling(data, methodName);
+			
+			if (methodName === 'password-reset' && response.isEmailSent) {
+				triggerDialog('A link has been sent to your Email');
+			} 
+			
+			if (response && response.error) {
+				setIsInvalid(true);
+				setInputError(response.message);
 			}
-		})
+		} catch (error) {
+			console.error('Error during authentication:', error);
+			setIsInvalid(true);
+			setInputError('An unexpected error occurred. Please try again.');
+		}
+		//AuthHandling(data, methodName).then(response => {
+		//	if (methodName == 'password-reset' && response.isEmailSent) {
+		//		triggerDialog('A link has been to your Email')
+		//	} 
+		//	if (response.error){
+		//		setIsInvalid(true)
+		//		setInputError(response.message)
+		//	}
+
+		//	if (response.isLogin) {
+		//		navigate(response.redirectTo)
+		//	}
+		//})
 	})
 
 	//const forgotAuthHandline = () => {
@@ -54,25 +73,15 @@ export const LoginForm = () => {
 
 	const setInvalidFalse = () => setIsInvalid(false)
 
-	const handleContextMenu = e => {
-		e.preventDefault()
-	}
-
-	const handleDragStart = e => {
-		e.preventDefault()
-	}
-
 	return (
 			<div className="body">
 				<div className="auth-container">
 					<div className="image-container">
 						<div className="absolute-center">
 							<ImageComponent
-								src={import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_CDN_ENDPOINT+"/showcase.svg" : "./src/assets/images/showcase.svg"}
+								src="/showcase.svg"
 								alt="Showcase of clothes - illustration"
 								className="showcase-img"
-								onContextMenu={handleContextMenu}
-								onDragStart={handleDragStart}
 							/>
 						</div>
 					</div>
@@ -83,12 +92,10 @@ export const LoginForm = () => {
 							className="form-container"
 						>
 							<div className="logo-image">
-								<img
-									src={import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_CDN_ENDPOINT+"/haute-couture-logo.svg" : "./src/assets/images/haute-couture-logo.svg"}
+								<ImageComponent
+									src="/haute-couture-logo.svg"
 									alt="Haute Couture Logo"
 									className="logo-img"
-									onContextMenu={handleContextMenu}
-									onDragStart={handleDragStart}
 								/>
 							</div>
 							<AnimatePresence mode="wait" initial={false}>

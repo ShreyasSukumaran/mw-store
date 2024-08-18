@@ -17,7 +17,6 @@ export const InputError = ({ message }) => {
 	} else {
 		input_tailwind = 'inputError'
 	}
-	console.log('message ', message)
 	return (
 		<motion.p className={input_tailwind} {...framer_error}>
 			{/*{!['User Not found', "Invalid Password!"].includes(message) && <MdError /> }*/}

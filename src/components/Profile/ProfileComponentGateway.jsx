@@ -1,7 +1,7 @@
-import useAuthRedirect from '../Auth/AuthRedirect';
+import useAuthRedirect from '../ApiRequests/Auth/AuthRedirect';
 
 export const ProfileComponentGateway = () => {
-    useAuthRedirect();
+    useAuthRedirect()
 
     return null;
 };

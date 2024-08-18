@@ -6,17 +6,11 @@ import { HamburgerMenu } from './HamburgerMenu/HamburgerMenu'
 import { IoIosSearch } from 'react-icons/io'
 import { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { ImageComponent } from '../../ImageComponent'
 
 export const MobileNavigation = ({ token }) => {
 	const [searchState, setSearchState] = useState(false)
 	const searchInputRef = useRef(null)
-	const handleContextMenu = e => {
-		e.preventDefault()
-	}
-
-	const handleDragStart = e => {
-		e.preventDefault()
-	}
 
 	const searchStateHandler = () => {
 		setSearchState(true)
@@ -45,7 +39,6 @@ export const MobileNavigation = ({ token }) => {
 		body.addEventListener('click', handleClick)
 
 		if (document.getElementById('bottom-search')) {
-			console.log(document.getElementById('bottom-search'))
 			const searchInput = document.getElementById('bottom-search')
 			searchInput.focus()
 		}
@@ -59,15 +52,13 @@ export const MobileNavigation = ({ token }) => {
 
 	return (
 		<>
-			<div className="navigation-container">
+			<div className="navigation-container" id="navigation-container">
 				<HamburgerMenu />
 				<Link className="nav-logo absolute-center" to="/home">
-					<img
-						src={import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_CDN_ENDPOINT+"/haute-couture-nav-logo-text.svg" : "./src/assets/images/haute-couture-nav-logo-text.svg"}
+					<ImageComponent
+						src="/haute-couture-nav-logo-text.svg"
 						alt="Haute Couture Logo"
 						className="logo-img"
-						onContextMenu={handleContextMenu}
-						onDragStart={handleDragStart}
 					/>
 				</Link>
 				<div className="nav-right flex-gap absolute-v-center">

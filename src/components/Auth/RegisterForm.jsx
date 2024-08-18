@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { Input } from '../Input/Input'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { InputError } from '../Input/InputError'
-import { AuthHandling } from './AuthHandling'
+import { AuthHandling } from '../ApiRequests/Auth/AuthHandling'
 import {
 	firstName_validation,
 	lastName_validation,
@@ -12,17 +12,26 @@ import {
 	password_validation,
 } from '../../utils/inputValidations'
 import './Auth.scss'
+import { ImageComponent } from '../ImageComponent'
 
 export const RegisterForm = () => {
 	const methods = useForm()
 	const [isInvalid, setIsInvalid] = useState(false)
 	const [inputError, setInputError] = useState('')
 	const logoImageClass = useRef('logo-image')
+    const navigate = useNavigate()
 
 	const onSubmit = methods.handleSubmit(async data =>
-		AuthHandling(data, 'register').then(error => {
-			setIsInvalid(true)
-			setInputError(error.message)
+		AuthHandling(data, 'register').then(response => {
+
+			if (response.error){
+				setIsInvalid(true)
+				setInputError(response.message)
+			}
+
+			if (response.isLogin) {
+				navigate(response.redirectTo)
+			}
 		}),
 	)
 
@@ -49,25 +58,15 @@ export const RegisterForm = () => {
 
 	const setInvalidFalse = () => setIsInvalid(false)
 
-	const handleContextMenu = e => {
-		e.preventDefault()
-	}
-
-	const handleDragStart = e => {
-		e.preventDefault()
-	}
-
 	return (
 		<div className="body">
 			<div className="auth-container">
 				<div className="image-container">
 					<div className="absolute-center">
-						<img
-							src={import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_CDN_ENDPOINT+"/showcase.svg" : "./src/assets/images/showcase.svg"}
+						<ImageComponent
+							src="/showcase.svg"
 							alt="Showcase of clothes - illustration"
 							className="showcase-img"
-							onContextMenu={handleContextMenu}
-							onDragStart={handleDragStart}
 						/>
 					</div>
 				</div>
@@ -78,12 +77,10 @@ export const RegisterForm = () => {
 						className="form-container register-form"
 					>
 						<div className={logoImageClass.current}>
-							<img
-								src={import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_CDN_ENDPOINT+"/haute-couture-logo.svg" : "./src/assets/images/haute-couture-logo.svg"}
+							<ImageComponent
+								src="/haute-couture-logo.svg"
 								alt="Haute Couture Logo"
 								className="logo-img"
-								onContextMenu={handleContextMenu}
-								onDragStart={handleDragStart}
 							/>
 						</div>
 						<AnimatePresence mode="wait" initial={false}>

@@ -374,6 +374,11 @@ export const userOptions = [
 		link: '/wishlist',
 	},
 	{
+		icon: '<CgHeart/>',
+		text: 'Profile',
+		link: '/profile/details',
+	},
+	{
 		icon: '<MdOutlineContactSupport/>',
 		text: 'Contact us',
 		link: '/contact-us',

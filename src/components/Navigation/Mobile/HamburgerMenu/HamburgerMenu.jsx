@@ -38,7 +38,7 @@ export const HamburgerMenu = () => {
 
 	return (
 		<div className="hamburger-menu absolute-center">
-			<AnimatePresence>
+			<AnimatePresence mode="wait" initial={false}>
 				<div className="menu-icon" onClick={toggleMenu}>
 					<motion.div
 						className="bar"

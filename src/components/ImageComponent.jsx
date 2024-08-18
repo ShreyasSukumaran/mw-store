@@ -1,48 +1,31 @@
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
 
-const ImageComponent = ({
-	src,
-	alt,
-	className,
-	onContextMenu,
-	onDragStart,
-}) => {
-	//const [imageUrl, setImageUrl] = useState(src)
+const handleContextMenu = e => {
+	e.preventDefault()
+}
 
-	useEffect(() => {
-		//const fetchImageUrl = async () => {
-		//	const response = await fetch(
-		//		src,
-		//	)
-		//	const data = await response.json()
-		//	console.log("Response : "+data);
-		//	console.log("url : "+src);
-		//	setImageUrl(data.signedUrl)
-		//}
+const handleDragStart = e => {
+	e.preventDefault()
+}
 
-		//fetchImageUrl()
-	}, [])
-
+export const ImageComponent = ({ src, alt, className, id }) => {
+	const localPath = "/src/assets/images"
+	src = import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_APP_R2_ENDPOINT+src : localPath+src
 	return (
 		<img
 			src={src}
 			alt={alt}
 			className={className}
-			onContextMenu={onContextMenu}
-			onDragStart={onDragStart}
+			id={id ? id : ''}
+			onContextMenu={handleContextMenu}
+			onDragStart={handleDragStart}
 		/>
 	)
 }
-
-
 
 ImageComponent.propTypes = {
 	src: PropTypes.string.isRequired,
 	alt: PropTypes.string.isRequired,
 	className: PropTypes.string.isRequired,
-	onContextMenu: PropTypes.func.isRequired,
-	onDragStart: PropTypes.func.isRequired,
+	id: PropTypes.string,
 }
-
-export default ImageComponent

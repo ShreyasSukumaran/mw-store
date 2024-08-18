@@ -1,5 +1,5 @@
 //import { useDialog } from '../../hooks/DialogContext'
-import { DialogContext } from '../../hooks/DialogContext'
+import { DialogContext } from './DialogContext'
 import { useContext } from 'react'
 
 export const useDialogTrigger = () => {

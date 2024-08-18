@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import { AuthHandling } from '../Auth/AuthHandling';
+import { AuthHandling } from './AuthHandling';
 
 const useAuthRedirect = () => {
 	const location = useLocation();

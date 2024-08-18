@@ -14,14 +14,7 @@ import {
 	userOptions,
 } from '../product'
 import { useState } from 'react'
-
-const handleContextMenu = e => {
-	e.preventDefault()
-}
-
-const handleDragStart = e => {
-	e.preventDefault()
-}
+import { ImageComponent } from '../../ImageComponent'
 
 export const Navigation = ({ token }) => {
 	const [hoverHeart, setOnHoverHeart] = useState(true)
@@ -29,15 +22,13 @@ export const Navigation = ({ token }) => {
 	const [hoverProfile, setOnHoverProfile] = useState(true)
 
 	return (
-		<div className="navigation-container">
+		<div className="navigation-container" id="navigation-container">
 			<div className="nav-left flex-gap">
 				<Link className="nav-logo" to="/home">
-					<img
-						src={import.meta.env.VITE_ENV == "production" ? import.meta.env.VITE_CDN_ENDPOINT+"/haute-couture-nav-logo-text.svg" : "./src/assets/images/haute-couture-nav-logo-text.svg"}
+					<ImageComponent
+						src='/haute-couture-nav-logo-text.svg'
 						alt="Haute Couture Logo"
 						className="logo-img"
-						onContextMenu={handleContextMenu}
-						onDragStart={handleDragStart}
 					/>
 				</Link>
 				<ul className="nav-links flex-gap">
@@ -164,7 +155,7 @@ export const Navigation = ({ token }) => {
 							onMouseEnter={() => setOnHoverProfile(false)}
 							onMouseLeave={() => setOnHoverProfile(true)}
 						>
-							<Link to="/profile" className="user-links category-link">
+							<Link to="/profile/details" className="user-links category-link">
 								<p className="mg-0">
 									<span className="user-link-icon">
 										{hoverProfile ? <CgProfile /> : <RiAccountCircleFill />}
@@ -176,13 +167,8 @@ export const Navigation = ({ token }) => {
 								<div className={'link-list-1 linked-list'}>
 									{token !== 'false' && (
 										<div>
-											<p className="txt-bold">Welcome</p>
-											<p>To access account and manage orders</p>
-											<div className="flex-h-center">
-												<Link to="/register" className="register-btn">
-													Login/Signup
-												</Link>
-											</div>
+											<p className="txt-bold">Hello</p>
+											<p>{sessionStorage.getItem('firstName')}</p>
 											<div className="divider"></div>
 										</div>
 									)}

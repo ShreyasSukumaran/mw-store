@@ -152,7 +152,6 @@ img {
 	color: var(--dark-brown);
 }
 
-
 .primary-link {
 	text-decoration: underline;
 	cursor: pointer;
@@ -161,4 +160,18 @@ img {
 	&:hover {
 		color: var(--dark-brown);
 	}
+}
+
+select {
+	background: url()
+		no-repeat 95%;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+select.option {
+	-moz-appearance: inherit;
+	-webkit-appearance: inherit;
+	appearance: inherit;
 }

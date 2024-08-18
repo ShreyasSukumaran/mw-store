@@ -30,7 +30,7 @@ const MenuItem = ({ title, items, icon }) => {
 					<MdKeyboardArrowRight />
 				</motion.div>
 			</div>
-			<AnimatePresence>
+			<AnimatePresence mode="wait" initial={false}>
 				{isSubmenuOpen && (
 					<motion.div className="submenu-titles" {...framer_key}>
 						{items.map((item, index) => (
@@ -50,7 +50,7 @@ const MenuItem = ({ title, items, icon }) => {
 										<MdKeyboardArrowRight />
 									</motion.div>
 								</div>
-								<AnimatePresence>
+								<AnimatePresence mode="wait" initial={false}>
 									{openIndex === index && (
 										<motion.div className="submenu" {...framer_key}>
 											{item.productList.map((product, subIndex) => (

@@ -11,15 +11,18 @@
 	},
 	"dependencies": {
 		"@popperjs/core": "^2.11.8",
+		"axios": "^1.7.4",
 		"classnames": "^2.3.2",
 		"framer-motion": "^10.11.2",
 		"gsap": "^3.12.5",
+		"mime-types": "^2.1.35",
 		"react": "^18.3.1",
 		"react-device-detect": "^2.2.3",
 		"react-dom": "^18.3.1",
 		"react-hook-form": "^7.43.9",
 		"react-icons": "^4.8.0",
 		"react-router-dom": "^6.23.1",
+		"react-select": "^5.8.0",
 		"universal-cookie": "^7.1.4"
 	},
 	"devDependencies": {

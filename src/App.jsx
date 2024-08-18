@@ -11,13 +11,15 @@ import { Logout } from './components/Auth/Logout'
 import { ProfileComponent, ProfileComponentGateway } from './components/Profile'
 import { Route, Navigate, Routes } from 'react-router-dom'
 import { isMobile } from 'react-device-detect'
-import { DialogProvider } from './context/DialogContext'
+import { DialogProvider } from './hooks/DialogContext'
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
 function App() {
-	const token = cookies.get('TOKEN') ? cookies.get('TOKEN') : 'false'
+	const token = (cookies.get('TOKEN') && typeof(cookies.get('TOKEN')) !== "object") ? cookies.get('TOKEN') : 'false'
+
+	console.log(token)
 
 	return (
 		<>
@@ -66,7 +68,7 @@ function App() {
 						element={<ProfileComponentGateway />}
 					/>
 					<Route
-						path="/password-update"
+						path="/profile/*"
 						element={
 							token !== 'false' ? (
 								<ProfileComponent />

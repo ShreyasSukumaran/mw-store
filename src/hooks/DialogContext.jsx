@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 import './Dialog.scss';
@@ -35,11 +35,7 @@ const framer = {
 	transition: { duration: 0.2 },
 }
 
-
 DialogProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-export const useDialog = () => {
-    return useContext(DialogContext);
-};

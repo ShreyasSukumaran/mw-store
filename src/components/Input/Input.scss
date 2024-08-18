@@ -153,6 +153,8 @@
 	position: relative;
 
 	input {
-		width: -webkit-fill-available;
+		width: -moz-available; /* For Firefox */
+		width: -webkit-fill-available; /* For Chrome/Safari */
+		width: fill-available; /* Standard */
 	}
 }

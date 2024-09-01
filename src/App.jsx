@@ -16,17 +16,25 @@ import { PromptProvider } from './hooks/Prompt/PromptContext'
 import { UserProvider } from './hooks/UserContext/UserContext'
 
 import Cookies from 'universal-cookie'
+import AdminMobileNavigation from './components/Navigation/Admin/Mobile/AdminMobileNavigation'
+import { AdminNavigation } from './components/Navigation/Admin/Desktop/AdminNavigation'
+import AdminDashboardComponent from './components/Dashboard/AdminDashboard/AdminDashboard'
 const cookies = new Cookies()
 
 function App() {
 	const token = cookies.get('TOKEN') ? cookies.get('TOKEN') : 'false'
+
+	const isAdmin = sessionStorage.getItem('isAdmin');
 
 	return (
 		<>
 			<UserProvider>
 				<DialogProvider>
 					<PromptProvider>
-						{isMobile ? <MobileNavigation /> : <Navigation token={token} />}
+						{isMobile ?
+							(isAdmin == 'true' ? <AdminMobileNavigation token={token} /> : <MobileNavigation token={token} />) :
+							(isAdmin == 'true' ? <AdminNavigation token={token} /> : <Navigation token={token} />)
+						}
 						<Routes>
 							<Route
 								path="/"
@@ -59,7 +67,7 @@ function App() {
 								path="/dashboard"
 								element={
 									token !== 'false' ? (
-										<DashboardComponent />
+										(isAdmin == 'true' ? <AdminDashboardComponent /> :  <DashboardComponent />)
 									) : (
 										<Navigate to="/login" />
 									)

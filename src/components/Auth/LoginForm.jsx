@@ -6,7 +6,7 @@ import {
 } from '../../utils/inputValidations'
 import { AuthHandling } from '../ApiRequests/Auth/AuthHandling'
 import { InputError } from '../Input/InputError'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Auth.scss'
@@ -39,24 +39,7 @@ export const LoginForm = () => {
 			setIsInvalid(true);
 			setInputError('An unexpected error occurred. Please try again.');
 		}
-		//AuthHandling(data, methodName).then(response => {
-		//	if (methodName == 'password-reset' && response.isEmailSent) {
-		//		triggerDialog('A link has been to your Email')
-		//	} 
-		//	if (response.error){
-		//		setIsInvalid(true)
-		//		setInputError(response.message)
-		//	}
-
-		//	if (response.isLogin) {
-		//		navigate(response.redirectTo)
-		//	}
-		//})
 	})
-
-	//const forgotAuthHandline = () => {
-	//	AuthHandling()
-	//}
 
 	useEffect(() => {
 		const navElements = document.getElementsByClassName('navigation-container')
@@ -98,11 +81,11 @@ export const LoginForm = () => {
 									className="logo-img"
 								/>
 							</div>
-							<AnimatePresence mode="wait" initial={false}>
+							<AnimatePresence mode="wait">
 								{isInvalid && (
-									<div className="form-error-container">
+									<motion.div className="form-error-container">
 										<InputError message={inputError} key={inputError} />
-									</div>
+									</motion.div>
 								)}
 							</AnimatePresence>
 							<div className="form-inputs">

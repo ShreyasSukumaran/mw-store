@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Input } from '../Input/Input'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { InputError } from '../Input/InputError'
 import { AuthHandling } from '../ApiRequests/Auth/AuthHandling'
 import {
@@ -83,18 +83,18 @@ export const RegisterForm = () => {
 								className="logo-img"
 							/>
 						</div>
-						<AnimatePresence mode="wait" initial={false}>
+						<AnimatePresence mode="wait">
 							{isInvalid && (
-								<div className="form-error-container">
+								<motion.div className="form-error-container">
 									<InputError message={inputError} key={inputError} />
-								</div>
+								</motion.div>
 							)}
 						</AnimatePresence>
 						<div className="form-inputs">
-							<Input {...firstName_validation} setInvalidFalse={setInvalidFalse} />
-							<Input {...lastName_validation} setInvalidFalse={setInvalidFalse} />
-							<Input {...email_validation} setInvalidFalse={setInvalidFalse} />
-							<Input {...password_validation} setInvalidFalse={setInvalidFalse} />
+							<Input {...firstName_validation} setInvalidFalse={setInvalidFalse}  />
+							<Input {...lastName_validation} setInvalidFalse={setInvalidFalse}  />
+							<Input {...email_validation} setInvalidFalse={setInvalidFalse}  />
+							<Input {...password_validation} setInvalidFalse={setInvalidFalse}  />
 						</div>
 						<div className="text-center">
 							<div className="mt-5">

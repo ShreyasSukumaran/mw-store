@@ -7,7 +7,7 @@ import {
 } from '../../../utils/inputValidations'
 import { AuthHandling } from '../../ApiRequests/Auth/AuthHandling'
 import { InputError } from '../../Input/InputError'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import '../../Auth/Auth.scss'
 import Cookies from 'universal-cookie'
@@ -51,11 +51,11 @@ export const ChangePassword = () => {
 						noValidate
 						className="form-container"
 					>
-						<AnimatePresence mode="wait" initial={false}>
+						<AnimatePresence mode="wait">
 							{isInvalid && (
-								<div className="form-error-container">
+								<motion.div className="form-error-container">
 									<InputError message={inputError} key={inputError} />
-								</div>
+								</motion.div>
 							)}
 						</AnimatePresence>
 						<div className="form-inputs">
@@ -65,6 +65,7 @@ export const ChangePassword = () => {
 									<Input
 										{...old_password_validation}
 										setInvalidFalse={setInvalidFalse}
+										
 									/>
 									<h2 id='new-pass-text'>New Password</h2>
 								</>
@@ -72,10 +73,12 @@ export const ChangePassword = () => {
 							<Input
 								{...password_validation}
 								setInvalidFalse={setInvalidFalse}
+								
 							/>
 							<Input
 								{...repeat_password_validation}
 								setInvalidFalse={setInvalidFalse}
+								
 							/>
 						</div>
 						<div className="text-center form-submit">

@@ -20,7 +20,7 @@ export const DialogProvider = ({ children }) => {
         <DialogContext.Provider value={{ dialogMessage, openDialog }}>
             {children}
             {dialogMessage && (
-                <motion.div className="dialog" {...framer}>
+                <motion.div className="dialog" key={dialogMessage} {...framer}>
                     {dialogMessage}
                 </motion.div>
             )}

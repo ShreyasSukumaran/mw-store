@@ -60,11 +60,11 @@ export const ProfileDetail = ({ user, setUserDetails }) => {
 					noValidate
 					className="form-container"
 				>
-					<AnimatePresence mode="wait" initial={false}>
+					<AnimatePresence mode="wait">
 						{isInvalid && (
-							<div className="form-error-container">
+							<motion.div className="form-error-container">
 								<InputError message={inputError} key={inputError} />
-							</div>
+							</motion.div>
 						)}
 					</AnimatePresence>
 					<div className="detail-column-container form-inputs">
@@ -93,6 +93,7 @@ export const ProfileDetail = ({ user, setUserDetails }) => {
 													key={i}
 													{...input}
 													setInvalidFalse={setInvalidFalse}
+													
 												/>
 											))}
 										</motion.div>
@@ -125,6 +126,7 @@ export const ProfileDetail = ({ user, setUserDetails }) => {
 													key={i}
 													{...input}
 													setInvalidFalse={setInvalidFalse}
+													
 												/>
 											))}
 										</motion.div>

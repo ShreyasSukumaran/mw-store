@@ -6,7 +6,7 @@ export async function UserRequest(data, type) {
 	const cookies = new Cookies()
 
 	let token = cookies.get('TOKEN')
-	const getMethods = ['get-user']
+	const getMethods = ['get-user', 'get-seller']
 
 	let method = getMethods.includes(type) ? 'GET' : 'POST'
 
@@ -51,6 +51,7 @@ export async function UserRequest(data, type) {
 
 
 		if (type == 'get-user') {
+			console.log("USER DETAILS : ".result)
 			storeUserInSession(result)
 		}
 

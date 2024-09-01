@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { UserContext } from './UserContext'
-import { AuthHandling } from '../../components/ApiRequests/Auth/AuthHandling'
+import { AuthHandling, storeUserInSession } from '../../components/ApiRequests/Auth/AuthHandling'
 import { useDialogTrigger } from '../../hooks/Dialog/useDialog'
 
 export const useContent = () => {
@@ -13,6 +13,7 @@ export const useContent = () => {
 
 	const setUserDetails = async (user) => {
 		setUser(user)
+		storeUserInSession(user)
 
 		console.log("SET USER DETAILS USER ", user)
 

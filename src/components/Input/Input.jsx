@@ -17,6 +17,7 @@ export const Input = ({
 	setInvalidFalse,
 	value,
 	options,
+	maxLength
 }) => {
 	const {
 		register,
@@ -25,11 +26,15 @@ export const Input = ({
 	} = useFormContext()
 
 	const [passwordShown, setPasswordShown] = useState(false)
+	const [inputValue, setInputValue] = useState(value || '')
 
 	const inputError = findInputError(errors, id)
 	const isInvalid = isFormInvalid(inputError)
 
-	const handleChange = () => setInvalidFalse()
+	const handleChange = (event) => {
+		setInputValue(event.target.value);
+		setInvalidFalse()
+	}
 
 	if (type == 'select') {
 		value = options[0]['value']
@@ -45,7 +50,7 @@ export const Input = ({
 		return (
 			<div className="flex-grid password">
 				<div className="flex-space-btw">
-					<AnimatePresence mode="wait" initial={false}>
+					<AnimatePresence mode="wait">
 						{isInvalid && (
 							<InputError
 								message={inputError.error.message}
@@ -75,9 +80,9 @@ export const Input = ({
 	} else if (type === 'select') {
 		// Dropdown input for gender
 		return (
-			<div className="flex-grid" style={{ position: 'relative', height: 'min-content', margin: "15px auto 0"}}>
+			<div className="flex-grid" style={{ position: 'relative', height: 'min-content', margin: "15px auto 0", backgroundColor: "none" }}>
 				<div className="flex-space-btw">
-					<AnimatePresence mode="wait" initial={false}>
+					<AnimatePresence mode="wait">
 						{isInvalid && (
 							<InputError
 								message={inputError.error.message}
@@ -106,7 +111,7 @@ export const Input = ({
 		return (
 			<div className="flex-grid">
 				<div className="flex-space-btw">
-					<AnimatePresence mode="wait" initial={false}>
+					<AnimatePresence mode="wait">
 						{isInvalid && (
 							<InputError
 								message={inputError.error.message}
@@ -121,6 +126,7 @@ export const Input = ({
 					name={name}
 					className="input"
 					placeholder={placeholder}
+					value={inputValue}
 					{...register(id, { ...validation, onChange: handleChange })}
 				/>
 			</div>
@@ -129,7 +135,7 @@ export const Input = ({
 		return (
 			<div className="flex-grid">
 				<div className="flex-space-btw">
-					<AnimatePresence mode="wait" initial={false}>
+					<AnimatePresence mode="wait">
 						{isInvalid && (
 							<InputError
 								message={inputError.error.message}
@@ -144,6 +150,8 @@ export const Input = ({
 					name={name}
 					className="input"
 					placeholder={placeholder}
+					maxLength={maxLength ? maxLength : ''}
+					value={inputValue}
 					{...register(id, { ...validation, onChange: handleChange })}
 				/>
 			</div>
@@ -160,6 +168,7 @@ Input.propTypes = {
 	setInvalidFalse: PropTypes.func.isRequired,
 	value: PropTypes.string,
 	options: PropTypes.array,
+	maxLength: PropTypes.number,
 	validation: PropTypes.shape({
 		required: PropTypes.shape({
 			value: PropTypes.any,
@@ -169,5 +178,5 @@ Input.propTypes = {
 			value: PropTypes.any,
 			message: PropTypes.string,
 		}),
-	}).isRequired,
+	}),
 }

@@ -2,6 +2,35 @@
 	height: 100%;
 	margin: 0 auto;
 	margin-top: 1px;
+
+
+	.eye {
+		top: 50% !important;
+	}
+
+	@media screen and (max-width: 499px) {
+		padding: 0;
+		width: 100vw;
+	}
+
+	@media screen and (min-width: 500px) {
+		padding: 0;
+		width: 100vw;
+	}
+
+	@media screen and (min-width: 900px) {
+		padding: 0;
+		width: 90vw;
+	}
+
+	@media screen and (min-width: 1200px) {
+		padding: 0;
+		width: 75vw;
+	}
+	@media screen and (min-width: 1440px) {
+		width: 1200px;
+	}
+
 	.auth-container {
 		background-color: var(--white);
 		height: max-content;
@@ -56,24 +85,6 @@
 			}
 		}
 	}
-
-	.eye {
-		top: 50% !important;
-	}
-
-	@media screen and (max-width: 499px) {
-		padding: 0;
-		width: 100vw;
-	}
-
-	@media screen and (min-width: 500px) {
-		padding: 0;
-		width: 75vw;
-	}
-	@media screen and (min-width: 1440px) {
-		width: 1200px;
-	}
-
 	.profile-container {
 		display: flex;
 		height: 100%;
@@ -83,12 +94,24 @@
 
 			#option {
 				width: 100%;
+				background: none;
 			}
 
 			.sidebar {
 				.profile-content {
 					padding-bottom: 0;
 					border: 0;
+				}
+
+				.become-seller-btn {
+					align-items: flex-end;
+					display: flex;
+					position: absolute;
+					bottom: 0;
+					justify-content: center;
+					width: -webkit-fill-available;
+					width: -moz-available;
+					width: fill-available;
 				}
 			}
 		}
@@ -98,6 +121,7 @@
 			right: 10%;
 			top: 50%;
 			transform: translateY(-50%);
+			z-index: -1;
 		}
 	}
 
@@ -398,9 +422,6 @@
 			}
 			@media screen and (max-width: 1440px) {
 				width: 280px;
-			}
-			@media screen and (max-width: 1699px) {
-				width: 300px;
 			}
 			@media screen and (min-width: 1700px) {
 				width: 330px;

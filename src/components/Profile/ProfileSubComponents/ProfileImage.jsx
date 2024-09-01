@@ -8,6 +8,7 @@ import { IoMdClose } from "react-icons/io";
 import PropTypes from 'prop-types'
 import uploadFileToR2 from '../upload-to-r2'
 import { isMobile } from 'react-device-detect';
+import { useDialogTrigger } from '../../../hooks/Dialog/useDialog'
 
 export const ProfileImage = ({ user, setUserDetails }) => {
 	const initialProfileImage = user.profileImage ? user.profileImage : null
@@ -19,6 +20,7 @@ export const ProfileImage = ({ user, setUserDetails }) => {
 	const [extension, setExtension] = useState(null)
 	const [contentType, setContentType] = useState(null)
 	const [imageFile, setImageFile] = useState(null)
+	const triggerDialog = useDialogTrigger()
 
 	const handleImageClick = () => {
 		if (fileInputRef.current) {
@@ -45,6 +47,10 @@ export const ProfileImage = ({ user, setUserDetails }) => {
 				setProfileImage(URL.createObjectURL(file))
 				setContentType(file.type)
 				setImageFile(file)
+
+				if (isMobile) {
+					triggerDialog('Click tick(✓) symbol to set profile photo');
+				}
 			}
 			reader.readAsDataURL(file)
 		}
@@ -141,15 +147,15 @@ export const ProfileImage = ({ user, setUserDetails }) => {
 								{profileImage && <RiDeleteBinLine className='delete-button' onClick={deleteProfileImage} width="12px" height="12px" />}
 							</>
 						}
-						<input
-							type="file"
-							accept="image/*"
-							ref={fileInputRef}
-							style={{ display: 'none' }}
-							onChange={handleImageChange}
-							id="profile-input"
-						/>
 					</div>}
+					<input
+						type="file"
+						accept="image/*"
+						ref={fileInputRef}
+						style={{ display: 'none' }}
+						onChange={handleImageChange}
+						id="profile-input"
+					/>
 				</div>
 			</div>
 		</>

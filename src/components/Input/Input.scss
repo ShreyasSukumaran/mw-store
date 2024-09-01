@@ -7,8 +7,8 @@
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 8px;
-	background-color: #fee2e2;
-	color: #ef4444;
+	background-color: var(--error-bg-red) !important;
+	color: var(--error-red) !important;
 	font-weight: 600;
 	align-items: center;
 	border-radius: 15px;
@@ -31,7 +31,7 @@
 	//font-family: 'umpush-light', 'Trebuchet MS', 'Lucida Sans Unicode',
 	//	'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	font-family: 'Poppins', sans-serif;
-	padding: 15px 30px;
+	padding: 13px 30px;
 	font-weight: 500;
 	//width: 100%;
 	border-radius: 30px;

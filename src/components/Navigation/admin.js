@@ -389,21 +389,3 @@ export const userOptions = [
 		link: '/logout',
 	},
 ]
-
-export const adminProfileOptions = [
-	{
-		icon: '<LuShoppingBag/>',
-		text: 'Orders',
-		link: '/orders',
-	},
-	{
-		icon: '<CgHeart/>',
-		text: 'Profile',
-		link: '/profile/details',
-	},
-	{
-		icon: '<MdOutlineContactSupport/>',
-		text: 'Logout',
-		link: '/logout',
-	},
-]

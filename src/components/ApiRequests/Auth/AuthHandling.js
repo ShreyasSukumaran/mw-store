@@ -9,7 +9,7 @@ export async function AuthHandling(data, type) {
 	let token = cookies.get('TOKEN');
 	const headers = {
 		'Content-Type': 'application/json',
-		...(token && { Authorization: `Bearer ${token}` }),
+		...(token && { 'Authorization': `Bearer ${token}` }),
 	};
 
 
@@ -22,6 +22,8 @@ export async function AuthHandling(data, type) {
 				body: JSON.stringify(json),
 			}
 		);
+		
+		console.log(response);
 
 		if (!response.ok) {
 			throw new Error(
@@ -63,6 +65,7 @@ const setAuthCookies = (cookies, value, timeoutInSeconds, name = 'TOKEN') => {
 
 export const storeUserInSession = (user) => {
 	sessionStorage.setItem('user', JSON.stringify(user));
+	console.log("USER SESSION : ". user)
 	Object.keys(user).forEach(key => {
 		sessionStorage.setItem(key, user[key]);
 	});

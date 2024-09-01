@@ -1,15 +1,8 @@
-//import { Link } from 'react-router-dom'
-//import PropTypes from 'prop-types'
 import './HamburgerMenu.scss'
 import MenuItem from '../MenuItem'
-//import { RxHamburgerMenu } from 'react-icons/rx'
-//import { IoCloseOutline } from 'react-icons/io5'
 import { motion, AnimatePresence } from 'framer-motion'
 import { GrUser, GrUserFemale } from 'react-icons/gr'
 import { PiWatchLight } from 'react-icons/pi'
-//import { MdOutlineContactSupport } from "react-icons/md"
-//import { CgHeart } from 'react-icons/cg'
-//import { LuShoppingBag } from 'react-icons/lu'
 import { LuMonitorSmartphone } from 'react-icons/lu'
 import { useState } from 'react'
 
@@ -19,15 +12,7 @@ import {
 	accessories,
 	electronics,
 	userOptions,
-} from '../../product'
-
-//const handleContextMenu = e => {
-//	e.preventDefault()
-//}
-
-//const handleDragStart = e => {
-//	e.preventDefault()
-//}
+} from '../../../product'
 
 export const HamburgerMenu = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -108,7 +93,3 @@ const framer_key = {
 	exit: { opacity: 0, y: -20 },
 	transition: { duration: 0.5 },
 }
-
-//MobileNavigation.propTypes = {
-//	token: PropTypes.string,
-//}

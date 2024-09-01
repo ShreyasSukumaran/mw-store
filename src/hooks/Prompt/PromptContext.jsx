@@ -37,7 +37,6 @@ export const PromptProvider = ({ children }) => {
 		}
 		document.getElementById("body").addEventListener('click', e => {
 			let $this = e.target
-			console.log($this.classList.value)
 			if (!(($this.classList.value).includes('prompt') || ($this.classList.value).includes('delete-button'))) {
 				setPromptMessage(null)
 			}
@@ -49,7 +48,7 @@ export const PromptProvider = ({ children }) => {
 		<PromptContext.Provider value={{ promptMessage, openPrompt }}>
 			{children}
 			{promptMessage && (
-				<motion.div className="prompt" id="prompt" {...framer}>
+				<motion.div className="prompt" id="prompt"  key={promptMessage} {...framer}>
 					<div>{promptMessage}</div>
 					<div className='prompt-buttons'>
 						<button onClick={() => onChoose(true)}>{postiveText}</button>

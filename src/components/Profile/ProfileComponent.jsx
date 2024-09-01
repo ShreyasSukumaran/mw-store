@@ -9,6 +9,7 @@ import { ProfileDetail } from './ProfileSubComponents/ProfileDetail'
 import { useContent } from '../../hooks/UserContext/useContent'
 import './profile.scss'
 import { ProfileImage } from './ProfileSubComponents/ProfileImage';
+import { BecomeSeller } from './ProfileSubComponents/BecomeSeller/BecomeSeller';
 
 export const ProfileComponent = () => {
 	let match = useMatch('/profile/*')
@@ -21,21 +22,26 @@ export const ProfileComponent = () => {
 
 
 	const updateUser = (data) => {
-
-
-		console.log("UPDATE USER PART : ", data)
 		let updatedUser = {
 			...user,
 			...data
 		}
 		setUser(updatedUser)
-
-		console.log("UPDATED USER : ", updatedUser)
-
 		setUserDetails(updatedUser)
 	}
 
-	const options = [
+	const options = user.isAdmin == 'false' ? [
+		{
+			label: "Profile Details",
+			value: "/details"
+		}, {
+			label: "Change Password",
+			value: "/change-password"
+		}, {
+			label: "Become a seller",
+			value: "/become-seller"
+		}
+	] : [
 		{
 			label: "Profile Details",
 			value: "/details"
@@ -54,7 +60,7 @@ export const ProfileComponent = () => {
 
 
 	useEffect(() => {
-		const height = document.getElementById("body").offsetHeight - 71;
+		const height = document.getElementById("body").offsetHeight - 75;
 		setProfileHeight(height);
 	}, [])
 
@@ -97,6 +103,9 @@ export const ProfileComponent = () => {
 						<li className={(match && match.pathname.includes('/details')) ? "active" : ""}>
 							<Link to={`${match?.pathnameBase}/details`}>Profile Details</Link>
 						</li>
+						{user.isAdmin == 'false' && <li className={(match && match.pathname.includes('/become-seller')) ? "active" : ""}>
+							<Link to={`${match?.pathnameBase}/become-seller`}>Become a seller</Link>
+						</li>}
 					</ul>}
 					{isMobile &&
 						<div style={{ position: 'relative', width: '80%', height: 'min-content', margin: "15px auto 0" }}>
@@ -123,6 +132,7 @@ export const ProfileComponent = () => {
 						<Route path="/" element={<h3>Please select a sub-component.</h3>} />
 						<Route path="/change-password" element={<ChangePassword />} />
 						<Route path="/details" element={<ProfileDetail user={user} setUserDetails={updateUser} />} />
+						{user.isAdmin == 'false' && <Route path="/become-seller" element={<BecomeSeller user={user} setUserDetails={updateUser} />} />}
 					</Routes>
 				</div>
 			</div>

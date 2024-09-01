@@ -33,8 +33,12 @@
 	--medium-lite-brown: #ffeed3;
 	--medium-brown: #e9c795;
 	--brown: #cea66a;
+	--grey-brown: #d4c0a0;
 	--dark-brown: #866b45;
 	--darker-brown: #665135;
+	--error-red: #ef4444;
+	--error-bg-red: #fee2e2;
+	--transparent: #00000005;
 }
 
 html {
@@ -174,4 +178,25 @@ select.option {
 	-moz-appearance: inherit;
 	-webkit-appearance: inherit;
 	appearance: inherit;
+}
+
+.sub-text {
+	color: var(--dark-brown);
+	background-color: var(--lite-brown);
+	padding: 15px;
+	border-radius: 12px;
+	font-size: 16px;
+	text-align: center;
+}
+
+/* For Chrome, Edge, Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
 }
